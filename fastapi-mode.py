@@ -26,4 +26,15 @@ async def generate_caption(file: UploadFile = File(...)):
     if not file.content_type.startswith("image/"):
         raise HTTPException(status_code=400, detail="Only image files are allowed")
 
+    try:
+        image_data = await file.read()
+        image = Image.open(BytesIO(image_data)).convert("RGB")
+        inputs = processor(images=image, return_tensors="pt").to(device)
 
+        outputs = model.generate(**inputs, max_length=300, num_beams=5)
+        caption = processor.decode(outputs[0], skip_special_tokens=True)
+
+        return JSONResponse(content={"caption": caption})
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error processing image: {str(e)}")
