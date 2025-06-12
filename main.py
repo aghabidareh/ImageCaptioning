@@ -17,3 +17,10 @@ def generate_caption(image_path):
     caption = processor.decode(outputs[0], skip_special_tokens=True)
 
     return caption
+
+def main():
+    image_path = "image.jpg"
+    caption = generate_caption(image_path)
+    print(f"Generated Caption: {caption}")
+
+
