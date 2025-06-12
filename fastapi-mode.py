@@ -21,3 +21,6 @@ async def root():
     return {"message": "Welcome to the Image Captioning API. Use POST /caption to upload an image."}
 
 
+@app.post("/caption")
+async def generate_caption(file: UploadFile = File(...)):
+    pass
