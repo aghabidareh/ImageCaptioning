@@ -11,6 +11,13 @@ app = FastAPI(
     version="1.0",
 )
 
+processor = BlipProcessor.from_pretrained("Salesforce/blip-image-captioning-base")
+model = BlipForConditionalGeneration.from_pretrained("Salesforce/blip-image-captioning-base")
+device = "cuda" if torch.cuda.is_available() else "cpu"
+model = model.to(device)
+
 @app.get("/")
 async def root():
     return {"message": "Welcome to the Image Captioning API. Use POST /caption to upload an image."}
+
+
