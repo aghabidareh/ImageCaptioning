@@ -13,4 +13,4 @@ app = FastAPI(
 
 @app.get("/")
 async def root():
-    pass
+    return {"message": "Welcome to the Image Captioning API. Use POST /caption to upload an image."}
