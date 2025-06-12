@@ -23,4 +23,7 @@ async def root():
 
 @app.post("/caption")
 async def generate_caption(file: UploadFile = File(...)):
-    pass
+    if not file.content_type.startswith("image/"):
+        raise HTTPException(status_code=400, detail="Only image files are allowed")
+
+
