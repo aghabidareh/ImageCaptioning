@@ -23,4 +23,5 @@ def main():
     caption = generate_caption(image_path)
     print(f"Generated Caption: {caption}")
 
-
+if __name__ == "__main__":
+    main()
